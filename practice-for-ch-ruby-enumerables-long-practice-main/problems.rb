@@ -13,7 +13,41 @@ class Array
         end
         self
     end
+
+
+    # we dont have access to each element
+    def my_select(&blk)
+
+        array = []
+        
+        if self.my_each.with_index do |&blk|
+
+            array << self[i]
+            end
+        end
+
+        return array
+
+    end
+
+
 end
+
+# use my each method 
+# takes a block
+# returns a  new array containing that only satisfies the blaock
+
+
+
+
+
+a = [1, 2, 3]
+a.my_select { |num| num > 1 } # => [2, 3]
+a.my_select { |num| num == 4 } # => []
+
+
+p "-------------------------------------------"
+
 
 return_value = [1, 2, 3].my_each do |num|
     puts num
