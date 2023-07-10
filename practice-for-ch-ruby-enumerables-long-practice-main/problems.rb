@@ -89,10 +89,31 @@ class Array
 
     end
 
+    #find base case
+    #inductive step
+    # if not array take data return [data]
+    #stack tracing
+    # recursion uses same method within method
+    # we are iterating as well, Array.each
+    # iteration we are flattening ele if it is an array, adding it to empty array
+    #if element in an array is not an array, shovel it into the flattened_array
+    #embed base case inside of an if else statement inside of a .each
+    #concatenate to flattened array and call my_flatten
+    def my_flatten(self)
 
+        flattened_array = []
+        self.my_each do |ele|
+            if ele.is_a?(Array)
+                flattened_array += my_flatten(ele) 
+            else
+                [ele]
+            end
+        end
+    end
 
-
-
+    # base case = [1,2,3]
+# flatten = [1, [2,[3]]]
+#my_flatten(flatten) # [1,2,3]
 
 
 
@@ -115,11 +136,15 @@ end
 # p a.my_select { |num| num == 4 } # => []
 
 
-p "-------------------------------------------"
+# p "-------------------------------------------"
 
 
-a = [1, 2, 3]
-# p a.my_any? { |num| num > 1 } # => true
-# p a.my_any? { |num| num == 4 } # => false
-p a.my_all? { |num| num > 1 } # => false
-p a.my_all? { |num| num < 4 } # => true
+# a = [1, 2, 3]
+# # p a.my_any? { |num| num > 1 } # => true
+# # p a.my_any? { |num| num == 4 } # => false
+# p a.my_all? { |num| num > 1 } # => false
+# p a.my_all? { |num| num < 4 } # => true
+
+    # base case = [1,2,3]
+flatten = [1, [2,[3]]]
+p my_flatten(flatten) # [1,2,3]
