@@ -34,7 +34,7 @@ class Array
     def my_select(&blk)
         #why does num correspond to self[i]?
         arr = []
-        self.my_each.with_index do |num|
+        self.my_each do |num|
 
             arr << num if blk.call(num)
 
@@ -56,6 +56,46 @@ class Array
         arr
 
     end
+
+    def my_any?(&blk)
+        #why does num correspond to self[i]?
+        
+        self.my_each do |num|
+
+             return true if blk.call(num)
+
+        end
+
+        false
+    end
+
+    
+    # increment count if proc retursn true
+    # if count == self.length  return true. else false
+
+    
+    def my_all?(&blk)
+        #why does num correspond to self[i]?
+        count = 0
+        self.my_each do |num|
+
+             count += 1 if blk.call(num)
+
+        end
+        
+        return true if count == self.length
+
+        false
+
+    end
+
+
+
+
+
+
+
+
 end
 
 
@@ -64,17 +104,22 @@ end
 # returns a  new array containing that only satisfies the blaock
 
 
-a = [1, 2, 3]
-p a.my_reject { |num| num > 1 } # => [1]
-p a.my_reject { |num| num == 4 } # => [1, 2, 3]
+# a = [1, 2, 3]
+# p a.my_reject { |num| num > 1 } # => [1]
+# p a.my_reject { |num| num == 4 } # => [1, 2, 3]
 
 
 
-a = [1, 2, 3]
-p a.my_select { |num| num > 1 } # => [2, 3]
-p a.my_select { |num| num == 4 } # => []
+# a = [1, 2, 3]
+# p a.my_select { |num| num > 1 } # => [2, 3]
+# p a.my_select { |num| num == 4 } # => []
 
 
 p "-------------------------------------------"
 
 
+a = [1, 2, 3]
+# p a.my_any? { |num| num > 1 } # => true
+# p a.my_any? { |num| num == 4 } # => false
+p a.my_all? { |num| num > 1 } # => false
+p a.my_all? { |num| num < 4 } # => true
